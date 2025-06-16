@@ -11,7 +11,7 @@ The `userInput` function takes as input the user `action` and an additional para
 The `updateCurrentState` function is intended to get data for rendering in the interface. It returns a structure containing information about the current state of the game. For example, for Tetris, the expiration of the timer causes the piece to move down one row. This function should be called from the interface at some intervals to keep the interface up to date.
 
 ```c
-typedef enum UserAction_t {
+typedef enum {
   Start,
   Pause,
   Terminate,
@@ -20,9 +20,9 @@ typedef enum UserAction_t {
   Up,
   Down,
   Action
-};
+} UserAction_t;
 
-typedef struct GameInfo_t {
+typedef struct {
   int **field;
   int **next;
   int score;
@@ -30,7 +30,7 @@ typedef struct GameInfo_t {
   int level;
   int speed;
   int pause;
-};
+} GameInfo_t;
 
 void userInput(UserAction_t action, bool hold);
 
