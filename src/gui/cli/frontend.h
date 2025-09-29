@@ -27,7 +27,7 @@
   }
 extern char field[WIDTH_IN_CHARS][HIGHT_IN_CHARS];
 
-void print_field(GameInfo_t* info);
+void print_field(const GameInfo_t* info);
 void print_menu();
 void print_game_over_prompt(void);
 void init_colors(void);

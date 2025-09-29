@@ -120,7 +120,7 @@ static void draw_playfield(const GameInfo_t* info) {
     for (int c = 0; c < WIDTH_IN_PIXELS; ++c) {
       int cell = field_cell_value(info, r, c);
       short pair = 0;
-      char fallback = ' ';
+      char fallback;
       if (cell > 0) {
         pair = colors_enabled ? tetromino_pair_from_cell(cell) : 0;
         fallback = colors_enabled ? ' ' : DEFAULT_CHAR;
@@ -272,7 +272,7 @@ static int preview_cell_value(const GameInfo_t* info, int row, int col) {
   return value;
 }
 
-void print_field(GameInfo_t* info) {
+void print_field(const GameInfo_t* info) {
   draw_playfield(info);
   draw_playfield_frame();
   draw_sidebar(info);
