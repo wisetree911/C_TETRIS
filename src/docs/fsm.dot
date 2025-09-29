@@ -1,0 +1,29 @@
+digraph TetrisFSM {
+    rankdir=LR;
+    size="8,4";
+
+    node [shape=rectangle, style="rounded", fontname="Helvetica"];
+
+    start [shape=circle, label="", width=0.25, height=0.25];
+    START;
+    SPAWN;
+    FALLING;
+    LOCK;
+    PAUSE;
+    GAME_OVER [shape=doublecircle];
+
+    start -> START;
+    START -> SPAWN;
+    SPAWN -> FALLING;
+    SPAWN -> GAME_OVER;
+    FALLING -> FALLING;
+    FALLING -> LOCK;
+    FALLING -> PAUSE;
+    FALLING -> GAME_OVER;
+    FALLING -> START;
+    LOCK -> SPAWN;
+    PAUSE -> FALLING;
+    PAUSE -> GAME_OVER;
+    PAUSE -> START;
+    GAME_OVER -> START;
+}
