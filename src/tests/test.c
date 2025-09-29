@@ -57,7 +57,7 @@ static int min_active_row(const GameInfo_t* info) {
   if (info->field) {
     for (int r = 0; r < FIELD_ROWS; ++r) {
       for (int c = 0; c < FIELD_COLS; ++c) {
-        if (info->field[r][c] > 0 && r < min_row) {
+        if (r < min_row && info->field[r][c] > 0) {
           min_row = r;
         }
       }
@@ -79,29 +79,29 @@ START_TEST(test_start_initial_state) {
 END_TEST
 
 START_TEST(test_move_left_stops_at_border) {
-  GameInfo_t info = fresh_state();
+  fresh_state();
   for (int i = 0; i < FIELD_COLS; ++i) {
     userInput(Left, false);
   }
-  info = updateCurrentState();
+  GameInfo_t info = updateCurrentState();
   ck_assert_int_ge(min_active_col(&info), 0);
 }
 END_TEST
 
 START_TEST(test_move_right_stops_at_border) {
-  GameInfo_t info = fresh_state();
+  fresh_state();
   for (int i = 0; i < FIELD_COLS; ++i) {
     userInput(Right, false);
   }
-  info = updateCurrentState();
+  GameInfo_t info = updateCurrentState();
   ck_assert_int_lt(max_active_col(&info), FIELD_COLS);
 }
 END_TEST
 
 START_TEST(test_hard_drop_places_piece_on_floor) {
-  GameInfo_t info = fresh_state();
+  fresh_state();
   userInput(Down, false);
-  info = updateCurrentState();
+  GameInfo_t info = updateCurrentState();
   ck_assert_int_eq(count_row_active(&info, FIELD_ROWS - 1), 4);
 }
 END_TEST
@@ -140,9 +140,9 @@ START_TEST(test_up_action_has_no_effect) {
 END_TEST
 
 START_TEST(test_pause_toggle) {
-  GameInfo_t info = fresh_state();
+  fresh_state();
   userInput(Pause, false);
-  info = updateCurrentState();
+  GameInfo_t info = updateCurrentState();
   ck_assert_int_eq(info.pause, 1);
   userInput(Pause, false);
   info = updateCurrentState();
@@ -151,9 +151,9 @@ START_TEST(test_pause_toggle) {
 END_TEST
 
 START_TEST(test_terminate_sets_game_over) {
-  GameInfo_t info = fresh_state();
+  fresh_state();
   userInput(Terminate, false);
-  info = updateCurrentState();
+  GameInfo_t info = updateCurrentState();
   ck_assert_int_eq(info.pause, 2);
 }
 END_TEST

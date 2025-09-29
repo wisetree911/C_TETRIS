@@ -287,7 +287,6 @@ void print_menu() {
   const char* text = "Press Enter to start.";
   int y = HIGHT_IN_CHARS / 2;
   int x = (WIDTH_IN_CHARS - (int)strlen(text)) / 2;
-  if (x < 1) x = 1;
   mvaddnstr(y, x, text, (int)strlen(text));
   refresh();
 }
@@ -296,7 +295,6 @@ void print_game_over_prompt(void) {
   const char* msg = "Game Over! Press R to restart or Q to quit.";
   int y = HIGHT_IN_CHARS / 2;
   int x = (WIDTH_IN_CHARS - (int)strlen(msg)) / 2;
-  if (x < 1) x = 1;
   mvaddnstr(y, x, msg, (int)strlen(msg));
   refresh();
 }
